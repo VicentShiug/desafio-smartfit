@@ -75,7 +75,7 @@
   font-weight: 700;
   text-transform: uppercase;
   padding: 14px;
-  width: 25%;
+  width: 100%;
   border: none;
   cursor: pointer;
 }
@@ -114,5 +114,8 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+  }
+  .form-group .btn-wrapper .btn {
+    width: 25%;
   }
 }
