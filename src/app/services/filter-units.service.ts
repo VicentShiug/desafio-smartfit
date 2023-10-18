@@ -22,7 +22,7 @@ type HOUR_INDEXES = 'morning' | 'afternoon' | 'night';
 @Injectable({
   providedIn: 'root'
 })
-export class FitlerUnitsService {
+export class FilterUnitsService {
 
   constructor() { }
 
