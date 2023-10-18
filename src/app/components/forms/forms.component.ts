@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { FitlerUnitsService } from 'src/app/services/fitler-units.service';
 import { GetUnitsService } from 'src/app/services/get-units.service';
 import { Location } from 'src/app/types/location.interface';
+
+
 
 @Component({
   selector: 'app-forms',
@@ -14,8 +17,12 @@ export class FormsComponent implements OnInit {
   filteredResults: Location[] = [];
   formGroup!: FormGroup;
 
-  constructor( private formBuilder: FormBuilder, private unitService: GetUnitsService) { }
-  
+  constructor(
+    private formBuilder: FormBuilder,
+    private unitService: GetUnitsService,
+    private filterUnitsService: FitlerUnitsService
+  ) { }
+
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
       hour: '',
@@ -30,12 +37,7 @@ export class FormsComponent implements OnInit {
   onSubmit(): void {
     const { value } = this.formGroup
     const { hour, showClosed } = value
-    if (!showClosed) {
-      this.filteredResults = this.results.filter(location => location.opened === true)
-    } else {
-      this.filteredResults = this.results
-    }
-    
+    this.filteredResults = this.filterUnitsService.filter(this.results, showClosed, hour)
   }
 
   onClean(): void {
